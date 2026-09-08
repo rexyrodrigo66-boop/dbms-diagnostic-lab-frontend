@@ -1,0 +1,78 @@
+import { Check, ChevronsUpDown } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { DEMO_USERS } from '@/app/demoUsers'
+import { ROLE_HOME } from '@/app/navigation'
+import { ROLE_ICONS } from '@/components/domain/RolePill'
+import { Button } from '@/components/ui/Button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/DropdownMenu'
+import { useAuth } from '@/hooks/useAuth'
+import { cn } from '@/lib/cn'
+import { ROLES, ROLE_DESCRIPTIONS, ROLE_LABELS, type Role } from '@/types'
+
+/**
+ * Demo affordance: switch role without signing out, so the whole permission
+ * model can be shown in one sitting. Labelled as demo mode so it is never
+ * mistaken for a production capability.
+ */
+export function RoleSwitcher() {
+  const { session, loginAs } = useAuth()
+  const navigate = useNavigate()
+
+  if (!session) return null
+  const currentRole = session.user.role
+  const CurrentIcon = ROLE_ICONS[currentRole]
+
+  const handleSelect = (role: Role) => {
+    loginAs(role)
+    navigate(ROLE_HOME[role] ?? '/dashboard', { replace: true })
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="secondary" size="md" className="gap-2">
+          <CurrentIcon className="text-fg-muted" />
+          <span className="hidden max-w-32 truncate sm:inline">{ROLE_LABELS[currentRole]}</span>
+          <ChevronsUpDown className="text-fg-muted" />
+        </Button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent align="end" className="w-72">
+        <DropdownMenuLabel>Demo mode · switch role</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {ROLES.map((role) => {
+          const Icon = ROLE_ICONS[role]
+          const isCurrent = role === currentRole
+          return (
+            <DropdownMenuItem
+              key={role}
+              onSelect={() => handleSelect(role)}
+              className="items-start gap-2.5 py-2"
+            >
+              <Icon className={cn('mt-0.5', isCurrent && '!text-accent')} />
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5">
+                  <span className={cn('text-13', isCurrent && 'font-semibold text-accent')}>
+                    {ROLE_LABELS[role]}
+                  </span>
+                  {isCurrent ? <Check className="!size-3 !text-accent" aria-hidden="true" /> : null}
+                </div>
+                <p className="mt-0.5 text-xs leading-snug text-fg-muted">
+                  {ROLE_DESCRIPTIONS[role]}
+                </p>
+                <p className="mt-0.5 text-2xs text-fg-disabled">Signed in as {DEMO_USERS[role].name}</p>
+              </div>
+            </DropdownMenuItem>
+          )
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}

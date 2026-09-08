@@ -1,0 +1,162 @@
+/* ---------------------------------------------------------------------------
+ * Design tokens — Diagnostic Lab LIMS
+ *
+ * Two complete palettes, authored together. Every semantic token exists in both
+ * themes; no component ever reaches for a raw hex value.
+ *
+ * Contrast: all foreground/background pairings below meet WCAG AA (4.5:1 for
+ * text, 3:1 for UI boundaries) in BOTH themes. Verified in Phase 12 by
+ * scripts/check-contrast.ts. Disabled text is intentionally exempt (WCAG 1.4.3).
+ * ------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* --- Surfaces: structure comes from hairlines, never shadows ------------ */
+  --canvas: #fcfcfd;
+  --surface: #ffffff;
+  --surface-2: #f9fafb;   /* table headers, subtle fills */
+  --surface-3: #f2f4f7;   /* hover, pressed */
+  --surface-inset: #f9fafb;
+
+  --hairline: #e4e7ec;
+  --hairline-strong: #d0d5dd;
+
+  /* --- Foreground -------------------------------------------------------- */
+  --fg: #101828;
+  --fg-secondary: #475467;
+  --fg-muted: #667085;
+  --fg-disabled: #98a2b3;
+  --fg-on-accent: #ffffff;
+
+  /* --- Accent: desaturated clinical blue --------------------------------- */
+  --accent: #0b5fa5;
+  --accent-hover: #094b84;
+  --accent-active: #073c6b;
+  --accent-subtle: #eff6fc;
+  --accent-border: #a9cdea;
+  --focus-ring: #0b5fa5;
+
+  /* --- Diagnostic result flags ------------------------------------------- */
+  --flag-normal: #475467;
+  --flag-low: #175cd3;
+  --flag-low-bg: #eff8ff;
+  --flag-high: #b54708;
+  --flag-high-bg: #fffaeb;
+  --flag-critical: #b42318;
+  --flag-critical-bg: #fef3f2;
+
+  /* --- Sample pipeline statuses ------------------------------------------ */
+  --status-pending: #667085;
+  --status-pending-bg: #f2f4f7;
+  --status-collected: #175cd3;
+  --status-collected-bg: #eff8ff;
+  --status-received: #5925dc;
+  --status-received-bg: #f4f3ff;
+  --status-processing: #b54708;
+  --status-processing-bg: #fffaeb;
+  --status-completed: #067647;
+  --status-completed-bg: #ecfdf3;
+  --status-rejected: #b42318;
+  --status-rejected-bg: #fef3f2;
+
+  /* --- Feedback ---------------------------------------------------------- */
+  --success: #067647;
+  --success-bg: #ecfdf3;
+  --success-border: #abefc6;
+  --warning: #b54708;
+  --warning-bg: #fffaeb;
+  --warning-border: #fedf89;
+  --danger: #b42318;
+  --danger-hover: #912018;
+  --danger-bg: #fef3f2;
+  --danger-border: #fecdca;
+  --info: #175cd3;
+  --info-bg: #eff8ff;
+  --info-border: #b2ddff;
+
+  /* --- Charts: muted categorical, distinguishable in both themes --------- */
+  --chart-1: #0b5fa5;
+  --chart-2: #067647;
+  --chart-3: #b54708;
+  --chart-4: #5925dc;
+  --chart-5: #0e7090;
+  --chart-6: #b42318;
+  --chart-grid: #e4e7ec;
+
+  /* --- Elevation: overlays only ------------------------------------------ */
+  --shadow-overlay: 0 4px 6px -2px rgb(16 24 40 / 0.03), 0 12px 16px -4px rgb(16 24 40 / 0.08);
+  --shadow-popover: 0 2px 4px -2px rgb(16 24 40 / 0.06), 0 4px 8px -2px rgb(16 24 40 / 0.1);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --canvas: #0b0f16;
+  --surface: #111823;
+  --surface-2: #161f2c;
+  --surface-3: #1d2836;
+  --surface-inset: #0d131c;
+
+  --hairline: #232f3e;
+  --hairline-strong: #344054;
+
+  --fg: #f2f4f7;
+  --fg-secondary: #c0c8d4;
+  --fg-muted: #98a2b3;
+  --fg-disabled: #667085;
+  --fg-on-accent: #06121f;
+
+  --accent: #4e9be0;
+  --accent-hover: #6cb0ec;
+  --accent-active: #8cc3f2;
+  --accent-subtle: #14273a;
+  --accent-border: #2c4e70;
+  --focus-ring: #6cb0ec;
+
+  --flag-normal: #c0c8d4;
+  --flag-low: #84caff;
+  --flag-low-bg: #102a43;
+  --flag-high: #fdb022;
+  --flag-high-bg: #2e2007;
+  --flag-critical: #fda29b;
+  --flag-critical-bg: #33110d;
+
+  --status-pending: #98a2b3;
+  --status-pending-bg: #1d2836;
+  --status-collected: #84caff;
+  --status-collected-bg: #102a43;
+  --status-received: #b8a6ff;
+  --status-received-bg: #221a3d;
+  --status-processing: #fdb022;
+  --status-processing-bg: #2e2007;
+  --status-completed: #75e0a7;
+  --status-completed-bg: #0a2d1d;
+  --status-rejected: #fda29b;
+  --status-rejected-bg: #33110d;
+
+  --success: #75e0a7;
+  --success-bg: #0a2d1d;
+  --success-border: #1a5738;
+  --warning: #fdb022;
+  --warning-bg: #2e2007;
+  --warning-border: #5c4210;
+  --danger: #fda29b;
+  --danger-hover: #fec6c2;
+  --danger-bg: #33110d;
+  --danger-border: #66231c;
+  --info: #84caff;
+  --info-bg: #102a43;
+  --info-border: #1d4f7c;
+
+  --chart-1: #4e9be0;
+  --chart-2: #75e0a7;
+  --chart-3: #fdb022;
+  --chart-4: #b8a6ff;
+  --chart-5: #67d3e8;
+  --chart-6: #fda29b;
+  --chart-grid: #232f3e;
+
+  --shadow-overlay: 0 4px 6px -2px rgb(0 0 0 / 0.3), 0 12px 16px -4px rgb(0 0 0 / 0.45);
+  --shadow-popover: 0 2px 4px -2px rgb(0 0 0 / 0.35), 0 4px 8px -2px rgb(0 0 0 / 0.45);
+}

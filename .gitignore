@@ -141,3 +141,22 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# ---------------------------------------------------------------------------
+# Project additions (Vite + editor), appended to the GitHub Node template above.
+# ---------------------------------------------------------------------------
+dist-ssr
+*.local
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# This project's .env holds build-time configuration only — VITE_API_MODE and
+# VITE_API_BASE_URL — and no secrets. It is committed on purpose so the team
+# shares one API configuration. Anything prefixed VITE_ is exposed in the
+# browser bundle, so never put a password, key or connection string here.
+!.env
